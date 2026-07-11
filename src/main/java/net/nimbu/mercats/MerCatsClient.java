@@ -1,6 +1,7 @@
 package net.nimbu.mercats;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -9,6 +10,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.nimbu.entity.ModEntities;
+import net.nimbu.entity.client.MerCatRenderer;
+import net.nimbu.event.ModEventBusEvents;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = MerCats.MODID, dist = Dist.CLIENT)
@@ -24,8 +28,7 @@ public class MerCatsClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        MerCats.LOGGER.info("HELLO FROM CLIENT SETUP");
-        MerCats.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
+        EntityRenderers.register(ModEntities.MERCAT.get(), MerCatRenderer::new);
     }
 }
